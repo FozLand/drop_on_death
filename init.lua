@@ -41,20 +41,26 @@ core.register_on_dieplayer( function(player)
 	-- drop inventory
 	local size = 8 -- or maybe player_inv:get_size("main")
 	for i=1, size do
-		core.add_item(
+		local stack = player_inv:get_stack( 'main', i )
+		if not string.find(stack:get_name(), 'admin') then
+			core.add_item(
 				pos, --{ x=pos.x + math.random( 0.1, 1.5 ), y=pos.y, z=pos.z + math.random( 0.1, 1.5 ) },
-				player_inv:get_stack( 'main', i )
+				stack
 			)
-		player_inv:set_stack( 'main', i, nil )
+			player_inv:set_stack( 'main', i, nil )
+		end
 	end
 
 	-- drop crafting grid
 	for i=1,player_inv:get_size( 'craft' ) do
-		core.add_item(
-			pos,
-			player_inv:get_stack( 'craft', i )
-		)
-		player_inv:set_stack( 'craft', i, nil )
+		local stack = player_inv:get_stack( 'craft', i )
+		if not string.find(stack:get_name(), 'admin') then
+			core.add_item(
+				pos,
+				stack
+			)
+			player_inv:set_stack( 'craft', i, nil )
+		end
 	end
 	
 	local ttl = tonumber( core.setting_get( 'item_entity_ttl' ) ) or '???'
