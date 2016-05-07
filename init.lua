@@ -1,4 +1,5 @@
 local load_time_start = os.clock()
+bones.enable = false
 
 core.register_alias( 'bones:bones', 'default:gravel')
 
