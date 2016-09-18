@@ -3,7 +3,7 @@ if minetest.get_modpath('bones') then
 	if minetest.global_exists('bones') then -- Disable via old bones global
 		bones.enable = false
 	else -- Disable via new bones_mode setting
-		minetest.setting_set("bones_mode", "keep")
+		minetest.setting_set('bones_mode', 'keep')
 	end
 end
 
@@ -30,8 +30,8 @@ core.register_on_dieplayer( function(player)
 	end
 
 	local player_inv = player:get_inventory()
-	if player_inv:is_empty("main") and
-		player_inv:is_empty("craft") then
+	if player_inv:is_empty('main') and
+		player_inv:is_empty('craft') then
 		return
 	end
 
@@ -44,7 +44,7 @@ core.register_on_dieplayer( function(player)
 	local player_inv = player:get_inventory()
 
 	-- drop inventory
-	local size = 8 -- or maybe player_inv:get_size("main")
+	local size = 8 -- or maybe player_inv:get_size('main')
 	for i=1, size do
 		local stack = player_inv:get_stack( 'main', i )
 		if not string.find(stack:get_name(), 'admin') then
