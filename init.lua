@@ -1,7 +1,11 @@
 local load_time_start = os.clock()
-bones.enable = false
-
-core.register_alias( 'bones:bones', 'default:gravel')
+if minetest.get_modpath('bones') then
+	if minetest.global_exists('bones') then -- Disable via old bones global
+		bones.enable = false
+	else -- Disable via new bones_mode setting
+		minetest.setting_set("bones_mode", "keep")
+	end
+end
 
 -- make sure items are not floating in the mid-air
 local function find_ground( pos )
